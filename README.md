@@ -10,6 +10,12 @@ Requires Node.js 20 or later. Run npm start, then open http://localhost:4173.
 
 Run npm test and npm run check.
 
+## Publish to Cloudflare Workers
+
+Run `npm install`, authenticate with `npx wrangler login`, then run `npm run deploy`.
+
+The build copies only the public browser files into `dist/`. Wrangler publishes that directory as a Workers Static Assets project named `broker-comparison`. Change `name` in `wrangler.jsonc` before the first deployment if you want a different `workers.dev` hostname.
+
 ## Data
 
 - data/monevator-broker-tables.json and its CSV counterpart are complete snapshots of the three comparison tables extracted on 13 September 2026.
