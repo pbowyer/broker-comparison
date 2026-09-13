@@ -1,6 +1,7 @@
 import { accountValue, compareStrategies, money } from './fee-engine.js';
 import { createPortfolioStorage } from './persistence.js';
 import { comparisonPresentation, restrictionProviders } from './presentation.js';
+import { PROVIDERS, PROVIDER_BY_ID } from './providers.js';
 import { createInitialState, normaliseSavedState } from './state.js';
 
 const emptyAssets = () => ({ funds: 0, etfs: 0, investmentTrusts: 0, shares: 0, bonds: 0 });
@@ -99,15 +100,32 @@ function fieldTemplate(account, personId, key, label) {
     '</span></label>';
 }
 
+function currentProviderOptions(selectedId) {
+  const labels = { flat: 'Flat fee providers', percentage: 'Percentage fee providers', trading: 'Trading platforms' };
+  return '<option value="">Select provider</option>' + Object.entries(labels).map(([table, label]) =>
+    '<optgroup label="' + label + '">' + PROVIDERS.filter((provider) => provider.table === table)
+      .sort((left, right) => left.name.localeCompare(right.name))
+      .map((provider) => '<option value="' + provider.id + '"' + (provider.id === selectedId ? ' selected' : '') + '>' + escapeHtml(provider.name) + '</option>')
+      .join('') + '</optgroup>'
+  ).join('');
+}
+
+function currentProviderName(account) {
+  return PROVIDER_BY_ID[account.currentProviderId]?.name || 'Not selected';
+}
+
 function accountTemplate(account, personId) {
   return '<details class="account" data-person="' + personId + '" data-account="' + account.id + '">' +
-    '<summary><span><strong>' + accountName(account.type) + '</strong><small>' + escapeHtml(assetSummary(account)) + '</small></span><span class="account-total">' + money(accountValue(account)) + '</span></summary>' +
+    '<summary><span><strong>' + accountName(account.type) + '</strong><small>' + escapeHtml(assetSummary(account)) + '</small></span><span class="account-current">' + escapeHtml(currentProviderName(account)) + '</span><span class="account-total">' + money(accountValue(account)) + '</span></summary>' +
     '<div class="account-editor">' +
       '<div class="account-toolbar">' +
-        '<label>Account type<select data-action="account-type" data-person="' + personId + '" data-account="' + account.id + '">' +
-          '<option value="isa"' + (account.type === 'isa' ? ' selected' : '') + '>Stocks and Shares ISA</option>' +
-          '<option value="sipp"' + (account.type === 'sipp' ? ' selected' : '') + '>SIPP</option>' +
-        '</select></label>' +
+        '<div class="account-settings">' +
+          '<label>Account type<select data-action="account-type" data-person="' + personId + '" data-account="' + account.id + '">' +
+            '<option value="isa"' + (account.type === 'isa' ? ' selected' : '') + '>Stocks and Shares ISA</option>' +
+            '<option value="sipp"' + (account.type === 'sipp' ? ' selected' : '') + '>SIPP</option>' +
+          '</select></label>' +
+          '<label>Current holder<select data-action="current-provider" data-person="' + personId + '" data-account="' + account.id + '">' + currentProviderOptions(account.currentProviderId) + '</select></label>' +
+        '</div>' +
         '<button class="danger-link" type="button" data-action="delete-account" data-person="' + personId + '" data-account="' + account.id + '">Delete account</button>' +
       '</div>' +
       '<div class="asset-fields">' +
@@ -133,7 +151,7 @@ function personTemplate(person) {
       '<strong class="person-total">' + money(personValue(person)) + '</strong>' +
       '<button class="icon-button" type="button" data-action="delete-person" data-person="' + person.id + '" aria-label="Delete ' + escapeHtml(person.name) + '">×</button>' +
     '</header>' +
-    (person.accounts.length ? '<div class="account-list-head"><span>Account and holdings</span><span>Value</span></div>' : '') +
+    (person.accounts.length ? '<div class="account-list-head"><span>Account and holdings</span><span>Current holder</span><span>Value</span></div>' : '') +
     '<div class="accounts">' + person.accounts.map((account) => accountTemplate(account, person.id)).join('') + '</div>' +
     '<button class="text-button add-account" type="button" data-action="add-account" data-person="' + person.id + '">Add account</button>' +
   '</article>';
@@ -198,7 +216,7 @@ function restrictions(result) {
     '</div>';
 }
 
-function strategyTemplate(strategy, total) {
+function strategyTemplate(strategy, total, currentResult) {
   if (!strategy.result) {
     return '<article class="strategy unavailable"><h3>' + escapeHtml(strategy.title) + '</h3><p>' + escapeHtml(strategy.description) + '</p><strong>No compatible provider</strong><p>No provider in the dataset can hold every active account and asset category.</p></article>';
   }
@@ -206,6 +224,16 @@ function strategyTemplate(strategy, total) {
   const difference = strategy.difference < 0.005
     ? 'Lowest-cost arrangement'
     : money(strategy.difference, 2) + ' more than lowest';
+  let saving = '';
+  if (currentResult) {
+    const change = currentResult.fee - strategy.result.fee;
+    const label = Math.abs(change) < 0.005
+      ? 'Same estimated fee as now'
+      : change > 0
+        ? 'Save ' + money(change, 2) + ' a year'
+        : money(Math.abs(change), 2) + ' more a year';
+    saving = '<strong>' + escapeHtml(label) + '</strong><span>' + escapeHtml(difference) + '</span>';
+  }
   const rows = strategy.result.breakdown.map((item) =>
     '<div class="calculation-row"><span>' + escapeHtml(item.provider.name) +
       '<small>' + item.accounts.map(assignmentLabel).map(escapeHtml).join(', ') + '</small>' +
@@ -222,11 +250,34 @@ function strategyTemplate(strategy, total) {
     '<header><h3>' + escapeHtml(strategy.title) + '</h3><p>' + escapeHtml(strategy.description) + '</p></header>' +
     '<div class="fee-label">Estimated annual fee</div>' +
     '<div class="fee"><strong>' + money(strategy.result.fee, 2) + '</strong><span>' + percentage.toFixed(3) + '% of assets</span></div>' +
-    '<div class="difference">' + difference + '</div>' +
+    '<div class="difference">' + (saving || escapeHtml(difference)) + '</div>' +
     tiedArrangements(strategy.result) +
     restrictions(strategy.result) +
     '<details class="calculation"><summary>' + calculationLabel + '</summary>' + rows + '<p class="source-note">' + sourceLabel + '</p></details>' +
   '</article>';
+}
+
+function currentBaselineTemplate(current) {
+  const missing = current.missingAccountIds.length;
+  if (!current.result) {
+    const label = missing === 1 ? 'account' : 'accounts';
+    return '<section class="current-baseline current-baseline-incomplete" aria-labelledby="current-fee-title">' +
+      '<div><p class="baseline-label">Fees now</p><h3 id="current-fee-title">Current arrangement</h3><p>Select the current holder for ' + missing + ' ' + label + ' to compare before and after.</p></div>' +
+      '<div class="baseline-fee"><span>Estimated annual fee</span><strong aria-label="Not available">—</strong></div>' +
+    '</section>';
+  }
+  const providerCount = current.result.breakdown.length;
+  const providerLabel = providerCount === 1 ? 'provider' : 'providers';
+  const rows = current.result.breakdown.map((item) =>
+    '<div class="calculation-row"><span>' + escapeHtml(item.provider.name) +
+      '<small>' + item.accounts.map(assignmentLabel).map(escapeHtml).join(', ') + '</small>' +
+      '<small>' + escapeHtml(item.plan) + '</small></span><strong>' + money(item.fee, 2) + '</strong></div>'
+  ).join('');
+  return '<section class="current-baseline" aria-labelledby="current-fee-title">' +
+    '<div><p class="baseline-label">Fees now</p><h3 id="current-fee-title">Current arrangement</h3><p>' + providerCount + ' current ' + providerLabel + ', using the same fee assumptions as the comparison.</p></div>' +
+    '<div class="baseline-fee"><span>Estimated annual fee</span><strong>' + money(current.result.fee, 2) + '</strong></div>' +
+    '<details class="current-calculation"><summary>Show current fee calculation</summary>' + rows + '</details>' +
+  '</section>';
 }
 
 function assignmentSummary(strategy) {
@@ -236,9 +287,11 @@ function assignmentSummary(strategy) {
   const rows = Object.keys(result.assignments).map((accountId) => {
     const account = accountForId(accountId);
     const provider = providerForAccount(result, accountId);
+    const currentProvider = PROVIDER_BY_ID[account.currentProviderId];
     return '<div class="assignment-row" role="row">' +
       '<span role="cell"><strong>' + escapeHtml(assignmentLabel(accountId)) + '</strong><small>' + escapeHtml(assetSummary(account)) + '</small></span>' +
       '<span role="cell">' + money(accountValue(account)) + '</span>' +
+      '<span role="cell">' + escapeHtml(currentProvider?.name || 'Not selected') + '</span>' +
       '<span role="cell"><strong>' + escapeHtml(provider?.name || 'Unknown provider') + '</strong></span>' +
     '</div>';
   }).join('');
@@ -248,7 +301,7 @@ function assignmentSummary(strategy) {
   return '<section class="assignment-summary" aria-labelledby="assignment-title">' +
     '<header><h3 id="assignment-title">Account placement</h3><p>' + escapeHtml(note) + '</p></header>' +
     '<div class="assignment-table" role="table" aria-label="One lowest-fee account placement">' +
-      '<div class="assignment-head" role="row"><span role="columnheader">Account</span><span role="columnheader">Value</span><span role="columnheader">Provider</span></div>' + rows +
+      '<div class="assignment-head" role="row"><span role="columnheader">Account</span><span role="columnheader">Value</span><span role="columnheader">Now</span><span role="columnheader">After</span></div>' + rows +
     '</div></section>';
 }
 
@@ -265,7 +318,7 @@ function renderResults() {
   document.querySelector('#results-title').textContent = presentation.title;
   document.querySelector('#results-description').textContent = presentation.description;
   const placement = presentation.strategies.find((strategy) => strategy.id === 'flexible') || presentation.strategies[0];
-  resultsRoot.innerHTML = '<div class="strategy-grid strategy-grid-' + presentation.strategies.length + '">' + presentation.strategies.map((strategy) => strategyTemplate(strategy, comparison.total)).join('') + '</div>' + assignmentSummary(placement);
+  resultsRoot.innerHTML = currentBaselineTemplate(comparison.current) + '<div class="strategy-grid strategy-grid-' + presentation.strategies.length + '">' + presentation.strategies.map((strategy) => strategyTemplate(strategy, comparison.total, comparison.current.result)).join('') + '</div>' + assignmentSummary(placement);
   if (!comparison.rankings.length) {
     rankingsRoot.innerHTML = '<p>No single provider can hold every active account and asset category.</p>';
     return;
@@ -299,7 +352,7 @@ function announce(message) {
 
 document.querySelector('#add-person').addEventListener('click', () => {
   const number = state.people.length + 1;
-  state.people.push({ id: nextId('person'), name: 'Person ' + number, active: true, accounts: [{ id: nextId('account'), type: 'isa', assets: emptyAssets() }] });
+  state.people.push({ id: nextId('person'), name: 'Person ' + number, active: true, accounts: [{ id: nextId('account'), type: 'isa', currentProviderId: '', assets: emptyAssets() }] });
   render();
   queuePortfolioSave();
   announce('Person ' + number + ' added');
@@ -343,6 +396,14 @@ peopleRoot.addEventListener('change', (event) => {
     queuePortfolioSave();
     announce('Account type changed');
   }
+  if (action === 'current-provider') {
+    const found = findAccount(target.dataset.person, target.dataset.account);
+    found.account.currentProviderId = target.value;
+    target.closest('.account').querySelector('.account-current').textContent = currentProviderName(found.account);
+    renderResults();
+    queuePortfolioSave();
+    announce(target.value ? 'Current holder updated' : 'Current holder removed');
+  }
 });
 
 peopleRoot.addEventListener('click', (event) => {
@@ -351,7 +412,7 @@ peopleRoot.addEventListener('click', (event) => {
   const action = button.dataset.action;
   const person = state.people.find((item) => item.id === button.dataset.person);
   if (action === 'add-account') {
-    const account = { id: nextId('account'), type: 'isa', assets: emptyAssets() };
+    const account = { id: nextId('account'), type: 'isa', currentProviderId: '', assets: emptyAssets() };
     person.accounts.push(account);
     render();
     const editor = peopleRoot.querySelector('details[data-account="' + account.id + '"]');

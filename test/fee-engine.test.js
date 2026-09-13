@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateArrangement, compareStrategies, isCompatible, tiered } from '../src/fee-engine.js';
+import { calculateArrangement, calculateCurrentArrangement, compareStrategies, isCompatible, tiered } from '../src/fee-engine.js';
 import { PROVIDER_BY_ID } from '../src/providers.js';
 
 const assets = (values = {}) => ({ funds: 0, etfs: 0, investmentTrusts: 0, shares: 0, bonds: 0, ...values });
@@ -121,4 +121,29 @@ test('returns unavailable strategies when every provider table is disabled', () 
   );
   assert.equal(result.rankings.length, 0);
   assert.ok(result.strategies.every((strategy) => strategy.result === null));
+});
+
+test('calculates current fees using each account holder and provider-level caps', () => {
+  const alex = person('alex', [
+    { ...account('isa', 'isa', { etfs: 100000 }), currentProviderId: 'fidelity' },
+    { ...account('sipp', 'sipp', { etfs: 100000 }), currentProviderId: 'fidelity' },
+  ]);
+
+  const current = calculateCurrentArrangement([alex]);
+
+  assert.equal(current.result.fee, 180);
+  assert.equal(current.result.breakdown.length, 1);
+  assert.deepEqual(current.missingAccountIds, []);
+});
+
+test('does not present a partial current fee when an account holder is missing', () => {
+  const alex = person('alex', [
+    { ...account('isa', 'isa', { funds: 100000 }), currentProviderId: 'aj-bell' },
+    account('sipp', 'sipp', { funds: 100000 }),
+  ]);
+
+  const current = calculateCurrentArrangement([alex]);
+
+  assert.equal(current.result, null);
+  assert.deepEqual(current.missingAccountIds, ['sipp']);
 });

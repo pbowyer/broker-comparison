@@ -11,7 +11,7 @@ test('a new visitor starts without household data', () => {
 test('saved state is reduced to supported portfolio fields', () => {
   const state = normaliseSavedState({
     filters: { tables: ['flat', 'unknown'], includeZeroFee: false },
-    people: [{ id: 1, name: 'Alex', active: true, ignored: 'value', accounts: [{ id: 2, type: 'other', assets: { funds: 10, shares: -5 }, ignored: 'value' }] }],
+    people: [{ id: 1, name: 'Alex', active: true, ignored: 'value', accounts: [{ id: 2, type: 'other', currentProviderId: 'aj-bell', assets: { funds: 10, shares: -5 }, ignored: 'value' }] }],
   });
 
   assert.deepEqual(state.filters, { tables: ['flat'], includeZeroFee: false });
@@ -19,6 +19,14 @@ test('saved state is reduced to supported portfolio fields', () => {
     id: '1',
     name: 'Alex',
     active: true,
-    accounts: [{ id: '2', type: 'isa', assets: { funds: 10, etfs: 0, investmentTrusts: 0, shares: 0, bonds: 0 } }],
+    accounts: [{ id: '2', type: 'isa', currentProviderId: 'aj-bell', assets: { funds: 10, etfs: 0, investmentTrusts: 0, shares: 0, bonds: 0 } }],
   });
+});
+
+test('drops an unknown saved current provider', () => {
+  const state = normaliseSavedState({
+    people: [{ id: 'p1', accounts: [{ id: 'a1', type: 'isa', currentProviderId: 'unknown', assets: {} }] }],
+  });
+
+  assert.equal(state.people[0].accounts[0].currentProviderId, '');
 });

@@ -116,6 +116,17 @@ function activePeople(people) {
   return people.filter((person) => person.active && person.accounts.some((account) => accountValue(account) > 0));
 }
 
+export function calculateCurrentArrangement(people) {
+  const active = activePeople(people);
+  const accounts = active.flatMap((person) => person.accounts.filter((account) => accountValue(account) > 0));
+  const missingAccountIds = accounts
+    .filter((account) => !PROVIDER_BY_ID[account.currentProviderId])
+    .map((account) => account.id);
+  if (!accounts.length || missingAccountIds.length) return { result: null, missingAccountIds };
+  const assignments = Object.fromEntries(accounts.map((account) => [account.id, account.currentProviderId]));
+  return { result: calculateArrangement(assignments, active), missingAccountIds: [] };
+}
+
 function assignmentFor(accounts, providerId) {
   return Object.fromEntries(accounts.map((account) => [account.id, providerId]));
 }
@@ -147,7 +158,7 @@ function combineAssignments(optionGroups, limit = 5000) {
 export function compareStrategies(people, filters = {}) {
   const active = activePeople(people);
   const accounts = active.flatMap((person) => person.accounts.filter((account) => accountValue(account) > 0));
-  if (!accounts.length) return { total: 0, strategies: [], rankings: [] };
+  if (!accounts.length) return { total: 0, strategies: [], rankings: [], current: { result: null, missingAccountIds: [] } };
   const enabledTables = new Set(filters.tables || ['flat', 'percentage', 'trading']);
   const providers = PROVIDERS.filter((provider) => enabledTables.has(provider.table) && (filters.includeZeroFee !== false || provider.model !== 'zero'));
 
@@ -212,5 +223,5 @@ export function compareStrategies(people, filters = {}) {
   const availableFees = strategies.filter((strategy) => strategy.result).map((strategy) => strategy.result.fee);
   const lowest = availableFees.length ? Math.min(...availableFees) : null;
   for (const strategy of strategies) if (strategy.result) strategy.difference = strategy.result.fee - lowest;
-  return { total: sumAccounts(accounts), strategies, rankings: householdCandidates };
+  return { total: sumAccounts(accounts), strategies, rankings: householdCandidates, current: calculateCurrentArrangement(people) };
 }

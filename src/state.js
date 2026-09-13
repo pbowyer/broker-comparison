@@ -1,3 +1,5 @@
+import { PROVIDER_BY_ID } from './providers.js';
+
 export function createInitialState() {
   return {
     filters: {
@@ -26,6 +28,7 @@ export function normaliseSavedState(saved) {
     accounts: Array.isArray(person.accounts) ? person.accounts.map((account) => ({
       id: String(account.id),
       type: account.type === 'sipp' ? 'sipp' : 'isa',
+      currentProviderId: PROVIDER_BY_ID[account.currentProviderId] ? account.currentProviderId : '',
       assets: Object.fromEntries(assetKeys.map((key) => [key, Math.max(0, Number(account.assets?.[key]) || 0)])),
     })) : [],
   }));
