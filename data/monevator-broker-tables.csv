@@ -1,0 +1,121 @@
+table,row,Platform,Annual fee,Fee notes,Trading: Funds,"Trading: ETFs, ITs, bonds, shares",Regular investing,FX fee,Entry/exit fee,Good for
+flat-fee,1,InvestEngine,£0 (DIY service),ETFs only,No funds,£0 daily fixed times,£0,£0,£0,Zero fees
+flat-fee,2,Flexible shares ISA,£0,-,n/a,£0 daily fixed times,£0,£0,£0,ETF portfolios
+flat-fee,3,Trading,£0,-,n/a,£0 daily fixed times,£0,£0,£0,ETF portfolios
+flat-fee,4,SIPP,£0,-,n/a,£0 daily fixed times,£0,£0,£0,ETF portfolios
+flat-fee,5,Prosper,£0,"Restricted funds list, 0% OCFs on some",£0,£0,£0,£0,£0,Zero fees
+flat-fee,6,Flexible Shares ISA,£0,-,£0,£0,£0,£0,£0,Fund and ETF portfolios
+flat-fee,7,Trading,£0,-,£0,£0,£0,£0,£0,Fund and ETF portfolios
+flat-fee,8,SIPP,£0,No drawdown,£0,£0,£0,£0,£0,Fund and ETF portfolios
+flat-fee,9,Lightyear,£0,-,No funds,£0,£0,0.1%,£0,Zero fees
+flat-fee,10,Flexible Shares ISA,£0,-,n/a,£0,£0,0.1%,£0,ETF portfolios
+flat-fee,11,Trading,£0,-,n/a,£0,£0,0.1%,£0,ETF portfolios
+flat-fee,12,SIPP,n/a,n/a,n/a,n/a,n/a,n/a,n/a,-
+flat-fee,13,Freetrade,£0 Basic plan,Standard and Plus plans include lower FX fees and higher cash interest,£0,£0,£0,0.99% Basic. 0.59% Standard. 0.39% Plus,£0,Zero fees
+flat-fee,14,Flexible Shares ISA/JISA,£0 Basic plan,-,£0,£0,£0,0.99%,£0,ETF and fund portfolios
+flat-fee,15,Trading,£0 Basic plan,-,£0,£0,£0,0.99%,£0,ETF and fund portfolios
+flat-fee,16,SIPP,£0 Basic plan,"No drawdown, £240 per UFPLS",£0,£0,£0,0.99%,£0,ETF and fund portfolios
+flat-fee,17,Barclays Direct Investing,£0,-,£0,£6,£0,1% up to £5k trade. Cheaper tiers above,£0,Zero fees on funds
+flat-fee,18,Flexible Shares ISA,£0,-,£0,£6,£0,As above,£0,Fund portfolios
+flat-fee,19,Trading,£0,-,£0,£6,£0,As above,£0,Fund portfolios
+flat-fee,20,SIPP,n/a,Currently closed to new customers,n/a,n/a,n/a,n/a,n/a,-
+flat-fee,21,Interactive Investor,"£71.88 Core plan. Includes ISA, GIA & SIPP. Portfolios under £100k only","£179.88 Plus plan. Includes ISA, GIA & SIPP. 1 free trade a month. Free JISAs. 5 free family accounts",£3.99 Core. £1.49 Plus. £0 Premium,"£3.99 Core, Plus. £2.99 Premium",£0,0.75% Core. 0.75% Plus up to £50k & 0.25% above. 0.25% Premium,£0,-
+flat-fee,22,Shares ISA/JISA,£71.88 Core plan. No JISA on Core plan.,£179.88 Plus plan,£3.99 Core. £1.49 Plus. £0 Premium,"£3.99 Core, Plus. £2.99 Premium",£0,As above,£0,-
+flat-fee,23,Trading,£71.88 Core plan,£179.88 Plus plan,£3.99 Core. £1.49 Plus. £0 Premium,"£3.99 Core, Plus. £2.99 Premium",£0,As above,£0,-
+flat-fee,24,SIPP,£71.88 Core plan. £0 drawdown/UFPLS,£179.88 Plus plan. £0 drawdown/UFPLS,£3.99 Core. £1.49 Plus. £0 Premium,"£3.99 Core, Plus. £2.99 Premium",£0,As above,£0,"Direct fee portfolios from £60K to £100K. See Vanguard, Fidelity and AJ Bell"
+flat-fee,25,Lloyds Bank Share Dealing,Single £36 fee for ISA plus trading account,"Lloyds, Halifax and Scottish Widows are the same firm for FSCS purposes",£1.50,£9.50* ETFs / UK shares. £0 international shares,£0,1%,£0,-
+flat-fee,26,Shares ISA,£36,Free for ages 18-25 or private banking customers,£1.50,£9.50* ETFs / UK shares. £0,£0,1%,£0,-
+flat-fee,27,Trading,£36,Free for ages 18-25 or private banking customers,£1.50,£9.50* ETFs / UK shares. £0,£0,1%,£0,-
+flat-fee,28,SIPP,0.25% up to £79.2k portfolio value. Max £198,£0 drawdown/UFPLS,£1.50,£9.50* ETFs / UK shares. £0,£0,1%,£0,-
+flat-fee,29,Halifax/Bank Of Scotland Share Dealing,Single £36 fee if you hold ISA and trading account,"Halifax, Lloyds and Scottish Widows are the same firm for FSCS purposes",£9.50,£9.50* ETFs / UK shares. £0,£0,1.25%,£0,-
+flat-fee,30,Shares ISA,£36,Free for ages 18-25,£9.50,£9.50* ETFs / UK shares. £0,£0,1.25%,£0,-
+flat-fee,31,Trading,£36,Free for ages 18-25,£9.50,£9.50* ETFs / UK shares. £0,£0,1.25%,£0,-
+flat-fee,32,SIPP,0.25% up to £79.2k. Max £198,£0 drawdown/UFPLS,£9.50,£9.50* ETFs / UK shares. £0,£0,1.25%,£0,-
+flat-fee,33,Scottish Widows Share Dealing,-,"Scottish Widows, Halifax and Lloyds are the same firm for FSCS purposes",£5,£5 ETFs / UK shares. £0 international shares,£0,1.5%,£0,-
+flat-fee,34,Shares ISA,£0,-,£5,£5 ETFs / UK shares. £0 international shares,£0,1.5%,£0,Direct fee portfolios
+flat-fee,35,Trading,£0,-,£5,£5 ETFs / UK shares. £0 international shares,£0,1.5%,£0,Direct fee portfolios
+flat-fee,36,SIPP,0.25% up to £79.2k. Max £198,£0 drawdown/UFPLS,£5,£5 ETFs / UK shares. £0 international shares,£0,1.5%,£0,-
+flat-fee,37,Revolut,£0 Standard plan (1 free monthly trade),£47.88 Plus plan (3 free monthly trades),No funds,0.25% of trade,n/a,"1% Standard (£1K free monthly), 0.5% Plus (£3K free monthly)",£0,-
+flat-fee,38,Flexible shares ISA,As above,-,n/a,0.25% of trade,n/a,As above,£0,-
+flat-fee,39,Trading,As above,-,n/a,0.25% of trade,n/a,As above,£0,-
+flat-fee,40,SIPP,n/a,n/a,n/a,n/a,n/a,n/a,n/a,-
+flat-fee,41,HSBC Invest Direct,Single £42 fee if you hold ISA & trading account,-,No funds,£10.50*. £39.95 bonds,n/a,£0,Exit: £15 per holding,-
+flat-fee,42,Shares ISA,£42,-,n/a,£10.50*. £39.95 bonds,n/a,£0,Exit: £15 per holding,-
+flat-fee,43,Trading,£42,-,n/a,£10.50*. £39.95 bonds,n/a,£0,Exit: £15 per holding,-
+flat-fee,44,SIPP,n/a,n/a,n/a,n/a,n/a,n/a,n/a,-
+flat-fee,45,Money Farm Share Investing,-,-,£3.95,£3.95. £5.95 bonds,n/a,0.7%,-,-
+flat-fee,46,Flexible shares ISA/JISA,0.35% up to £12.9k. Max £45,-,£3.95,£3.95. £5.95 bonds,n/a,0.7%,-,-
+flat-fee,47,Trading,£0,-,£3.95,£3.95. £5.95 bonds,n/a,0.7%,-,-
+flat-fee,48,SIPP,n/a,n/a,n/a,n/a,n/a,n/a,n/a,-
+flat-fee,49,EQi,"£59.99 up to £50k, £131.88 £50k+",Charged on sum of all accounts. 1 free monthly trade over £50k,"£0 buys, £6.99 sales",£6.99,£0.99,0.95%,-,Standalone LISA
+flat-fee,50,Flexible shares ISA,As above,LISA: 0.2% up to £20k. Max £40. Waived if hold ISA / SIPP,"£0 buys, £6.99 sales",£6.99,£0.99,0.95%,-,-
+flat-fee,51,Trading,As above,-,"£0 buys, £6.99 sales",£6.99,£0.99,0.95%,-,-
+flat-fee,52,SIPP,As above +£118.80,+£180 p.a. drawdown,"£0 buys, £6.99 sales",£6.99,£0.99,0.95%,Exit: £90,-
+percentage-fee,1,Dodl by AJ Bell,0.15%. Min £12 per account,Restricted fund/ETF list,£0,£0,£0,0.75% up to £10k trade. Cheaper tiers above. 0.5% dividends,£0,Simple investing
+percentage-fee,2,Shares ISA/LISA,As above,-,£0,£0,£0,As above,£0,-
+percentage-fee,3,Trading,As above,-,£0,£0,£0,As above,£0,-
+percentage-fee,4,SIPP,As above,No drawdown,£0,£0,£0,As above,£0,-
+percentage-fee,5,Chip,0.25% + £12 per account Basic Plan. Restricted fund/ETF list,£65.05 annual Chip X Plan. Restricted fund/ETF list,n/a,£0,£0,£0,£0,Simple investing
+percentage-fee,6,Flexible shares ISA,As above,As above,n/a,£0,£0,£0,£0,-
+percentage-fee,7,Trading,As above,As above,n/a,£0,£0,£0,£0,-
+percentage-fee,8,SIPP,n/a,n/a,n/a,n/a,n/a,n/a,n/a,-
+percentage-fee,9,Quilter Invest,0.25% + £24 per account,Restricted fund/ETF list,No funds,£0 at fixed times,£0,0.4%,£0,Simple investing
+percentage-fee,10,Flexible shares ISA/JISA,As above,-,n/a,£0 at fixed times,£0,0.4%,£0,-
+percentage-fee,11,Trading,As above,-,n/a,£0 at fixed times,£0,0.4%,£0,-
+percentage-fee,12,SIPP,n/a,n/a,n/a,n/a,n/a,n/a,n/a,-
+percentage-fee,13,AJ Bell,"0.25% up to £250k, 0.1% £250k – £500k, 0% over £500k. Tiered fee per account","0.25% on ETFs, shares, ITs, and bonds, capped as below",£1.50,£5*,£0,0.75% up to £10k trade. Cheaper tiers above. 0.5% dividends,£0,-
+percentage-fee,14,Shares ISA/LISA/ JISA,As above,£42 fee cap,£1.50,£5*,£0,As above,£0,-
+percentage-fee,15,Trading,As above,£42 fee cap,£1.50,£5*,£0,As above,£0,-
+percentage-fee,16,SIPP,As above,£120 fee cap. £0 drawdown/UFPLS,£1.50,£5*,£0,As above,£0,Direct fee ETF portfolio over £100K. See Interactive Investor
+percentage-fee,17,Fidelity,"£90 up to £25k, 0.35% £25k – £250k, 0.2% £250k – £1m, 0% over £1m","Fee not tiered below £1m, charged on sum of all accounts in own name. £2k fee cap",£0,£7.50,£1.50 (£0 for funds),0.75% up to £10k trade. Cheaper tiers above,£0,-
+percentage-fee,18,Shares ISA/JISA,As above. 0.35% below £25K on monthly savings plan. Free JISAs,"£90 fee cap ETFs, ITs, shares",£0,£7.50,£1.50 (£0 for funds),As above,£0,-
+percentage-fee,19,Trading,As above. 0.35% below £25K on monthly savings plan,"£0 for ETFs, ITs, shares",£0,£7.50,£1.50 (£0 for funds),As above,£0,-
+percentage-fee,20,SIPP,As above. 0.35% below £25K on monthly savings plan. Free JSIPPs,"£90 fee cap ETFs, ITs, shares. £0 drawdown/UFPLS",£0,£7.50,£1.50 (£0 for funds),As above,£0,Direct fee ETF portfolio over £100K. See Interactive Investor
+percentage-fee,21,Vanguard Investor,"£48 up to £32k, 0.15% 32k - £250k. 0% over 250k. Max £375",Tiered fee charged on sum of all accounts. Vanguard funds only,£0,"£0 at fixed times, £7.50 otherwise",£0,£0,£0,-
+percentage-fee,22,Flexible shares ISA/JISA,As above except no £48 min charge on JISA,-,£0,"£0 at fixed times, £7.50 otherwise",£0,£0,£0,-
+percentage-fee,23,Trading,As above,-,£0,"£0 at fixed times, £7.50 otherwise",£0,£0,£0,-
+percentage-fee,24,SIPP,As above,£0 drawdown/UFPLS,£0,"£0 at fixed times, £7.50 otherwise",£0,£0,£0,Direct fee portfolio up to approx £60K. See Interactive Investor
+percentage-fee,25,HSBC Global Investment Centre,0.25% on all investments,Restricted number of non-HSBC index funds,£0,£0,£0,n/a,£0,-
+percentage-fee,26,Shares ISA,As above,-,£0,£0,£0,n/a,£0,-
+percentage-fee,27,Trading,As above,-,£0,£0,£0,n/a,£0,-
+percentage-fee,28,SIPP,n/a,n/a,n/a,n/a,n/a,n/a,n/a,-
+percentage-fee,29,Charles Stanley Direct,"£60 up to £20k, 0.3% 20k - £200k. 0% over 200k. Max £600",£50 of trades free every 6 months,£4,£10,£0 for funds,1% up to £10k trade. Cheaper tiers above,Exit: £10 per holding,-
+percentage-fee,30,Flexible Shares ISA/JISA,As above,As above,£4,£10,£0 for funds,As above,Exit: £10 per holding,-
+percentage-fee,31,Trading,As above,As above,£4,£10,£0 for funds,As above,Exit: £10 per holding,-
+percentage-fee,32,SIPP,As above. +£120 if all accounts under £30k,+£60 drawdown,£4,£10,£0 for funds,As above,Exit: £10 per holding +£150,-
+percentage-fee,33,Santander Investment Hub,"0.35% up to £50k, 0.2% £50k – £500k, 0.1% over £500k",Tiered fee charged per account. Funds only,£0,n/a,£0,£0,£0,-
+percentage-fee,34,Shares ISA,As above,-,£0,n/a,£0,£0,£0,-
+percentage-fee,35,Trading,As above,-,£0,n/a,£0,£0,£0,-
+percentage-fee,36,SIPP,As above,-,£0,n/a,£0,£0,£0,-
+percentage-fee,37,Aviva,"0.35% up to £500k, 0% over £500k",Tiered fee charged on sum of all accounts,£0,£4.99,£0 for funds,£0,£0,-
+percentage-fee,38,Flexible Shares ISA,As above,-,£0,£4.99,£0 for funds,£0,£0,-
+percentage-fee,39,Trading,As above,-,£0,£4.99,£0 for funds,£0,£0,-
+percentage-fee,40,SIPP,As above,£0 drawdown/UFPLS,£0,£4.99,£0 for funds,£0,£0,-
+percentage-fee,41,Bestinvest,"0.4% up to £250k, 0.2% £250k – 500k, 0.1% 500k – £1m, 0% over £1m",Tiered fee charged per account,£0,£4.95 UK shares. £0 US shares,£0,0.95%,£0,-
+percentage-fee,42,Flexible shares ISA/JISA,As above,-,£0,£4.95 UK shares. £0 US shares,£0,0.95%,£0,-
+percentage-fee,43,Trading,As above,-,£0,£4.95 UK shares. £0 US shares,£0,0.95%,£0,-
+percentage-fee,44,SIPP,As above. Min £120 fee (not JSIPPs),£0 drawdown/UFPLS,£0,£4.95 UK shares. £0 US shares,£0,0.95%,£0,-
+percentage-fee,45,Hargreaves Lansdown,"0.35% up to £250k, 0.25% £250k – £1m, 0.1% £1m – £2m, 0% over £2m","Tiered fee charged per account. £150 fee cap on ETFs, shares, ITs, and bonds",£1.95,£6.95*,"£0 for ETFs, ITs & funds",0.99% up to £10k trade. Cheaper tiers above. 1% dividends,£0,Customer service
+percentage-fee,46,Shares ISA/LISA/JISA,As above except LISA is 0.25% up to £1m. JISAs are free,£150 fee cap for ISA. £45 fee cap for LISA,£1.95,£6.95*. £0 for JISAs,"£0 for ETFs, ITs & funds",As above,£0,-
+percentage-fee,47,Trading,As above,£150 fee cap,£1.95,£6.95*,"£0 for ETFs, ITs & funds",As above,£0,-
+percentage-fee,48,SIPP,As above,£150 fee cap. £0 drawdown/UFPLS,£1.95,£6.95*. £3.95 for JSIPPs,"£0 for ETFs, ITs & funds",As above,£0,-
+trading-platform,1,Interactive Brokers,-,£1 per BACs cash withdrawal after the first two per month,Varies,Rates vary by country. Also see tiered option,Rates vary by country,-,£0,International shares
+trading-platform,2,Shares ISA/JISA,£3 monthly inactivity fee,£3+ monthly trades = £0 inactivity fee,As above,"ETFs/Shares: 0.05% of trade. Min £3 UK, $4 US, €3 EU trades",As above,0.03%,£0,-
+trading-platform,3,Trading,£0,As above,As above,"ETFs/Shares: 0.05% of trade. Min £3 UK, $4 US, €3 EU trades",As above,0.03%,£0,-
+trading-platform,4,SIPP,Varies,n/a,As above,"ETFs/Shares: 0.05% of trade. Min £3 UK, $4 US, €3 EU trades",As above,0.03%,£0,-
+trading-platform,5,Trading 212 Sponsored link. Terms apply.,£0,-,No funds,£0,£0,0.15%,£0,Zero fees
+trading-platform,6,Flexible Shares ISA,£0,-,n/a,£0,£0,0.15%,£0,ETF portfolios
+trading-platform,7,Trading,£0,Securities lending scheme,n/a,£0,£0,0.15%,£0,ETF portfolios
+trading-platform,8,SIPP,£0,No drawdown,n/a,£0,£0,0.15%,£0,ETF portfolios
+trading-platform,9,Saxo,"0.12% up to £1m, 0.08% over £1m",Funds: 0.05%,£0,% of trade - varies by stock exchange and account,n/a,"0.6% Classic, 0.4% Platinum, 0.2% VIP",-,-
+trading-platform,10,Flexible shares ISA,As above,As above,£0,"UK & US: 0.08% Classic, 0.05% Platinum, 0.03% VIP",n/a,As above,£0,-
+trading-platform,11,Trading,As above,As above,£0,"UK & US: 0.08% Classic, 0.05% Platinum, 0.03% VIP",n/a,As above,Exit: €50 per holding. Max €160,-
+trading-platform,12,SIPP,As above +£469,"+£205 p.a. drawdown, £274 per UFPLS",£0,"UK & US: 0.08% Classic, 0.05% Platinum, 0.03% VIP",n/a,As above,Exit: €50 per holding (Max €160) + £428,-
+trading-platform,13,IG,£0,-,No funds,£0,n/a,0.7%,£0,Zero fees
+trading-platform,14,Flexible Shares ISA,£0,-,n/a,£0,n/a,0.7%,£0,-
+trading-platform,15,Trading,£0,-,n/a,£0,n/a,0.7%,£0,-
+trading-platform,16,SIPP,£210,"+£150 p.a. drawdown, £120 per UFPLS",n/a,£0,n/a,0.7%,Entry: £240,-
+trading-platform,17,Robinhood,£0,FSCS protection does not apply to your stocks,No funds,£0,£0,0.1%. 0.3% Fri 5pm-9pm ET,£0,-
+trading-platform,18,Shares ISA,£0,US shares only,n/a,£0,£0,As above,£0,-
+trading-platform,19,Trading,£0,"US shares only, securities lending scheme",n/a,£0,£0,As above,£0,-
+trading-platform,20,SIPP,n/a,n/a,n/a,n/a,n/a,n/a,n/a,-
