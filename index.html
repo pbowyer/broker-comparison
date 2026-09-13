@@ -11,18 +11,26 @@
   <a class="skip-link" href="#main">Skip to calculator</a>
   <header class="masthead">
     <a class="wordmark" href="#main" aria-label="Broker costs home">Broker costs</a>
-    <p>Compare platform fees for your ISA and SIPP</p>
+    <nav aria-label="Primary"><a class="current" href="#main">Compare costs</a><a href="#methodology">Method</a></nav>
     <div class="masthead-meta">
       <span id="household-label">Your household</span>
       <span>Data checked 13 September 2026</span>
     </div>
   </header>
-  <main id="main" class="workspace">
-    <section class="household-panel" aria-labelledby="household-title">
+  <main id="main">
+    <header class="page-intro">
+      <div>
+        <p class="eyebrow">Platform fee worksheet</p>
+        <h1>Annotated fee comparison</h1>
+        <p>Edit your portfolio and see how provider arrangements change the annual platform cost.</p>
+      </div>
+      <a href="#methodology">About these calculations <span aria-hidden="true">→</span></a>
+    </header>
+    <div class="workspace">
+      <section class="household-panel" aria-labelledby="household-title">
       <header class="section-heading">
         <div>
-          <p class="eyebrow">Portfolio</p>
-          <h1 id="household-title">Your household</h1>
+          <h2 id="household-title">Your portfolio</h2>
           <p id="household-summary" class="section-summary"></p>
         </div>
         <button id="add-person" class="text-button" type="button">Add person</button>
@@ -42,10 +50,9 @@
         </div>
       </div>
       <div id="people"></div>
-    </section>
-    <section class="results-panel" aria-labelledby="results-title">
+      </section>
+      <section class="results-panel" aria-labelledby="results-title">
       <header class="results-heading">
-        <p class="eyebrow">Annual platform fees only</p>
         <h2 id="results-title">Three ways to arrange these accounts</h2>
         <p id="results-description">Same holdings, different provider arrangements. Open a calculation to inspect its tariffs and restrictions.</p>
         <fieldset id="provider-filters" class="provider-filters">
@@ -61,7 +68,7 @@
         <summary>Compare all eligible single providers</summary>
         <div id="rankings"></div>
       </details>
-      <details class="methodology">
+      <details id="methodology" class="methodology">
         <summary>What this calculator includes</summary>
         <div class="prose">
           <p>It estimates recurring annual platform, custody, account, administration, and inactivity fees. It excludes dealing commissions, regular-investing charges, foreign exchange, spreads, stamp duty, fund and ETF charges, interest retained on cash, transfer and exit costs, drawdown, and UFPLS charges.</p>
@@ -69,7 +76,8 @@
           <p>Costs are estimates based on a static portfolio value. They are not financial advice and do not measure service, security, tax, investment choice, or suitability.</p>
         </div>
       </details>
-    </section>
+      </section>
+    </div>
   </main>
   <footer>
     <p>Fee facts come from <a href="https://monevator.com/compare-uk-cheapest-online-brokers/">Monevator’s broker tables</a> and official provider tariffs where available. <a href="data/monevator-broker-tables.json">Download the raw JSON</a> or <a href="data/monevator-broker-tables.csv">CSV</a>.</p>

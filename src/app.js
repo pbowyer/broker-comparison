@@ -133,6 +133,7 @@ function personTemplate(person) {
       '<strong class="person-total">' + money(personValue(person)) + '</strong>' +
       '<button class="icon-button" type="button" data-action="delete-person" data-person="' + person.id + '" aria-label="Delete ' + escapeHtml(person.name) + '">×</button>' +
     '</header>' +
+    (person.accounts.length ? '<div class="account-list-head"><span>Account and holdings</span><span>Value</span></div>' : '') +
     '<div class="accounts">' + person.accounts.map((account) => accountTemplate(account, person.id)).join('') + '</div>' +
     '<button class="text-button add-account" type="button" data-action="add-account" data-person="' + person.id + '">Add account</button>' +
   '</article>';
@@ -165,6 +166,14 @@ function providerList(result) {
 
 function providerForAccount(result, accountId) {
   return result.breakdown.find((item) => item.accounts.includes(accountId))?.provider;
+}
+
+function accountForId(accountId) {
+  for (const person of state.people) {
+    const account = person.accounts.find((item) => item.id === accountId);
+    if (account) return account;
+  }
+  return null;
 }
 
 function tiedArrangements(result) {
@@ -220,6 +229,29 @@ function strategyTemplate(strategy, total) {
   '</article>';
 }
 
+function assignmentSummary(strategy) {
+  if (!strategy?.result) return '';
+  const result = strategy.result;
+  const alternatives = result.alternatives?.length || 1;
+  const rows = Object.keys(result.assignments).map((accountId) => {
+    const account = accountForId(accountId);
+    const provider = providerForAccount(result, accountId);
+    return '<div class="assignment-row" role="row">' +
+      '<span role="cell"><strong>' + escapeHtml(assignmentLabel(accountId)) + '</strong><small>' + escapeHtml(assetSummary(account)) + '</small></span>' +
+      '<span role="cell">' + money(accountValue(account)) + '</span>' +
+      '<span role="cell"><strong>' + escapeHtml(provider?.name || 'Unknown provider') + '</strong></span>' +
+    '</div>';
+  }).join('');
+  const note = alternatives > 1
+    ? 'Showing one of ' + alternatives + ' arrangements at this fee. Compare the alternatives above.'
+    : 'The lowest-fee provider placement calculated for these accounts.';
+  return '<section class="assignment-summary" aria-labelledby="assignment-title">' +
+    '<header><h3 id="assignment-title">Account placement</h3><p>' + escapeHtml(note) + '</p></header>' +
+    '<div class="assignment-table" role="table" aria-label="One lowest-fee account placement">' +
+      '<div class="assignment-head" role="row"><span role="columnheader">Account</span><span role="columnheader">Value</span><span role="columnheader">Provider</span></div>' + rows +
+    '</div></section>';
+}
+
 function renderResults() {
   const comparison = compareStrategies(state.people, state.filters);
   if (!comparison.strategies.length) {
@@ -232,7 +264,8 @@ function renderResults() {
   const presentation = comparisonPresentation(comparison, state.people);
   document.querySelector('#results-title').textContent = presentation.title;
   document.querySelector('#results-description').textContent = presentation.description;
-  resultsRoot.innerHTML = '<div class="strategy-grid strategy-grid-' + presentation.strategies.length + '">' + presentation.strategies.map((strategy) => strategyTemplate(strategy, comparison.total)).join('') + '</div>';
+  const placement = presentation.strategies.find((strategy) => strategy.id === 'flexible') || presentation.strategies[0];
+  resultsRoot.innerHTML = '<div class="strategy-grid strategy-grid-' + presentation.strategies.length + '">' + presentation.strategies.map((strategy) => strategyTemplate(strategy, comparison.total)).join('') + '</div>' + assignmentSummary(placement);
   if (!comparison.rankings.length) {
     rankingsRoot.innerHTML = '<p>No single provider can hold every active account and asset category.</p>';
     return;
@@ -281,6 +314,7 @@ peopleRoot.addEventListener('input', (event) => {
     const wrap = target.closest('.account');
     wrap.querySelector('.account-total').textContent = money(accountValue(found.account));
     wrap.querySelector('summary small').textContent = assetSummary(found.account);
+    target.closest('.person').querySelector('.person-total').textContent = money(personValue(found.person));
     renderHeader();
     renderResults();
     queuePortfolioSave();
